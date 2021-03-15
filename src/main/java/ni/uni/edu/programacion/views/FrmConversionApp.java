@@ -6,8 +6,14 @@
 package ni.uni.edu.programacion.views;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import ni.uni.edu.programacion.Controllers.CalculatorController;
 import ni.uni.edu.programacion.views.panels.PnlCalculator;
+import ni.uni.edu.programacion.Controllers.TemperatureController;
+import ni.uni.edu.programacion.views.panels.PnlTemperature;
+import ni.uni.edu.programacion.Controllers.MonedaController;
+import ni.uni.edu.programacion.views.panels.PnlMoneda;
+
 
 /**
  *
@@ -16,6 +22,12 @@ import ni.uni.edu.programacion.views.panels.PnlCalculator;
 public class FrmConversionApp extends javax.swing.JFrame {
     private PnlCalculator pnlCalculator;
     private CalculatorController calculatorController;
+    private PnlTemperature pnlTemperatura;
+    private TemperatureController temperaturaController;
+    private PnlMoneda pnlMoneda;
+    private MonedaController monedaController;
+    private Object pnlTemperature;
+    
     /**
      * Creates new form FrmConversionApp
      */
@@ -35,7 +47,7 @@ public class FrmConversionApp extends javax.swing.JFrame {
         pnlLeftButtons = new javax.swing.JPanel();
         btnCalculator = new javax.swing.JButton();
         btnTemperature = new javax.swing.JButton();
-        btnCurrency = new javax.swing.JButton();
+        btnMoneda = new javax.swing.JButton();
         pnlContent = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,10 +67,20 @@ public class FrmConversionApp extends javax.swing.JFrame {
         pnlLeftButtons.add(btnCalculator);
 
         btnTemperature.setText("Temperatura");
+        btnTemperature.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTemperatureActionPerformed(evt);
+            }
+        });
         pnlLeftButtons.add(btnTemperature);
 
-        btnCurrency.setText("Moneda");
-        pnlLeftButtons.add(btnCurrency);
+        btnMoneda.setText("Moneda");
+        btnMoneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMonedaActionPerformed(evt);
+            }
+        });
+        pnlLeftButtons.add(btnMoneda);
 
         getContentPane().add(pnlLeftButtons, java.awt.BorderLayout.LINE_START);
 
@@ -83,6 +105,34 @@ public class FrmConversionApp extends javax.swing.JFrame {
        pnlContent.add(pnlCalculator, BorderLayout.CENTER);
        validate();
     }//GEN-LAST:event_btnCalculatorActionPerformed
+
+    private void btnTemperatureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemperatureActionPerformed
+         if(pnlTemperature== null){
+           pnlTemperature = new PnlTemperature();
+             TemperatureController temperatureController = new TemperatureController(pnlTemperature);
+       }
+       
+       if(pnlContent.getComponentCount() > 0){
+           pnlContent.remove(0);
+       }
+       
+       pnlContent.add((Component) pnlTemperature, BorderLayout.CENTER);
+       validate();
+    }//GEN-LAST:event_btnTemperatureActionPerformed
+
+    private void btnMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMonedaActionPerformed
+                if(pnlMoneda == null){
+           pnlMoneda = new PnlMoneda();
+           monedaController = new MonedaController(pnlMoneda);
+       }
+       
+       if(pnlContent.getComponentCount() > 0){
+           pnlContent.remove(0);
+       }
+       
+       pnlContent.add(pnlMoneda, BorderLayout.CENTER);
+       validate();
+    }//GEN-LAST:event_btnMonedaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +171,7 @@ public class FrmConversionApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculator;
-    private javax.swing.JButton btnCurrency;
+    private javax.swing.JButton btnMoneda;
     private javax.swing.JButton btnTemperature;
     private javax.swing.JPanel pnlContent;
     private javax.swing.JPanel pnlLeftButtons;
